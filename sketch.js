@@ -7,6 +7,9 @@ var engine, world;
 var canvas;
 var palyer, playerBase, playerArcher;
 var playerArrows = [];
+var arrow;
+var playerimage;
+
 
 
 function preload() {
@@ -39,6 +42,12 @@ function setup() {
     120,
     120
   );
+  arrow = new PlayerArrow(
+    playerArcher.body.position.x,
+    playerArcher.body.positon.y,
+    100,
+    10
+  )
 }
 
 function draw() {
@@ -49,7 +58,11 @@ function draw() {
   image(playerimage,player.position.x,player.position.y,50,180)
 
   playerArcher.display();
-
+  arrow.display();
+  
+  if (keyCode === 32) {
+    arrow.shoot(playerArcher.body.angle);
+  }
   // Title
   fill("#FFFF");
   textAlign("center");
@@ -58,18 +71,10 @@ function draw() {
 
 }
 
-function keyPressed(){
-  if(keyCode === 32){
-    var playerArrows = new PlayerArrow(playerArcher.body.position.x,playerArcher.body.position.y,100,10)
-    //playerArrows.push(playerArrows);
-  }
-}
 
-function keyReleased() {
-  if (keyCode === 32) {
-    playerArrows[playerArrows.length-1].shoot();
-  }
-}
+  
+
+
 
 
 
